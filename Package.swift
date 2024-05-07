@@ -13,14 +13,35 @@ let package = Package(
     products: [
         .library(
             name: "sdk-c",
-            targets: ["SDK_C"]
-        ),
+            targets: ["SDK_C_Wrapper"]
+        )
+    ],
+    dependencies: [
+        .package(
+            url: "https://github.com/DecibelSDK/SDK_BR.git",
+            from: "1.0.2"
+        )
     ],
     targets: [
         .binaryTarget(
             name: "SDK_C",
             path: "SDK_C.xcframework"
         ),
+        .target(
+            name: "SDK_C_Wrapper",
+            dependencies: [
+                .target(
+                    name: "SDK_C",
+                    condition: .when(platforms: [.iOS])
+                ),
+                .product(
+                    name: "sdk-br",
+                    package: "SDK_BR",
+                    condition: .when(platforms: [.iOS])
+                )
+            ],
+            path: "SDK_C_Wrapper"
+        )
     ]
 )
 
