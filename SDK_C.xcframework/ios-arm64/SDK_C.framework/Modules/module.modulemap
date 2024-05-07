@@ -1,0 +1,11 @@
+framework module SDK_C {
+  umbrella header "SDK_C.h"
+  export *
+
+  module * { export * }
+}
+
+module SDK_C.Swift {
+  header "SDK_C-Swift.h"
+  requires objc
+}

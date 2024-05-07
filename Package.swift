@@ -3,8 +3,6 @@
 //  
 //  Copyright © 2023 Medallia. Use subject to licensing terms.
 
-import PackageDescription
-
 let package = Package(
     name: "sdk-c",
     platforms: [
@@ -13,12 +11,23 @@ let package = Package(
     products: [
         .library(
             name: "sdk-c",
-            targets: ["SDK_C"]),
+            targets: ["SDK_C"]
+        ),
+        .library(
+            name: "sdk-br",
+            targets: ["SDK_BR"]
+        ),
     ],
     targets: [
-            .binaryTarget(
-                name: "SDK_C",
-                path: "SDK-C.xcframework"
-            )
+        .binaryTarget(
+            name: "SDK_C",
+            path: "SDK_C.xcframework"
+        ),
+        .binaryTarget(
+            name: "SDK_BR",
+            url: "https://github.com/DecibelSDK/SDK_BR/releases/download/1.0.1/SDK_BR.xcframework.zip",
+            checksum: "5bc54cca3f15b7dea50e83266475e9fcda53777e2856abb5a9c9617533c98cf2"
+        ),
     ]
 )
+
